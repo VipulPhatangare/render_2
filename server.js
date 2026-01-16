@@ -11,15 +11,28 @@ const sendActivateRequest = async () => {
     const response = await axios.get('https://render-1-0bgp.onrender.com/api/activate');
     console.log(`[${new Date().toLocaleTimeString()}] Activate request sent - Status: ${response.status}`);
   } catch (error) {
-    console.error(`[${new Date().toLocaleTimeString()}] Error sending activate request:`, error.message);
+    console.error(`[${new Date().toLocaleTimeString()}] Error sending activate request:(https://render-1-0bgp.onrender.com)`, error.message);
   }
 };
 
+const sendActivateRequestApiStore = async () => {
+  try {
+    const response = await axios.get('https://api-store-rryl.onrender.com/api/activate');
+    console.log(`[${new Date().toLocaleTimeString()}] Activate request sent - Status: ${response.status}`);
+  } catch (error) {
+    console.error(`[${new Date().toLocaleTimeString()}] Error sending activate request:(https://api-store-rryl.onrender.com)`, error.message);
+  }
+};
+
+
 // Send request immediately on startup
 sendActivateRequest();
+sendActivateRequestApiStore();
 
 // Set up interval to send request every 5 minutes (300000 milliseconds)
 setInterval(sendActivateRequest, 5 * 60 * 1000);
+setInterval(sendActivateRequestApiStore, 5 * 60 * 1000);
+
 console.log('Automatic activation requests scheduled every 5 minutes');
 
 // Serve static files from the 'public' directory
