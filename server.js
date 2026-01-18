@@ -25,13 +25,24 @@ const sendActivateRequestApiStore = async () => {
 };
 
 
+const sendActivateRequestAditya = async () => {
+  try {
+    const response = await axios.get('https://hackmatrix-rvgm.onrender.com/api/activate');
+    console.log(`[${new Date().toLocaleTimeString()}] Activate request sent - Status:  ${response.status}`);
+  } catch (error) {
+    console.error(`[${new Date().toLocaleTimeString()}] Error sending activate request:(https://hackmatrix-rvgm.onrender.com)`, error.message);
+  }
+};
+
 // Send request immediately on startup
 sendActivateRequest();
-sendActivateRequestApiStore();
+sendActivateRequestApiStore()
+sendActivateRequestAditya();
 
 // Set up interval to send request every 5 minutes (300000 milliseconds)
 setInterval(sendActivateRequest, 5 * 60 * 1000);
 setInterval(sendActivateRequestApiStore, 5 * 60 * 1000);
+setInterval(sendActivateRequestAditya, 5 * 60 * 1000);
 
 console.log('Automatic activation requests scheduled every 5 minutes');
 
